@@ -6,7 +6,6 @@ public class Blackjack {
 		System.out.println("Hello world!");
 		System.out.println("Hello world!");
 		System.out.println("I have a computer");
-		System.out.println("Sigma boy");
 	}
 	
 }
