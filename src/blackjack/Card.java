@@ -37,7 +37,7 @@ public class Card {
 		case 3:
 			result += "king";break;
 		default:
-			break;
+			result += value;break;
 		}
 		
 		return result+" of "+suit.toString().toLowerCase();
