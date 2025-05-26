@@ -87,5 +87,9 @@ public class Card {
 	 * copy the craps dice draw method
 	 */
 	
+			
+				
+	
+	
 	
 }

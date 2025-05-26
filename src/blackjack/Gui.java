@@ -52,34 +52,52 @@ public class Gui extends JFrame {
         bust.setFont(new Font("SansSerif", Font.BOLD, 20));
         bust.setBounds(220, 140, 250, 30);
         mainPanel.add(bust);
-
-        // Dealer cards
-        drawCard(mainPanel, "K", spadeImg, 180, 40);
-        drawCard(mainPanel, "A", heartImg, 270, 40);
-
-        // Player cards
-        drawCard(mainPanel, "10", diamondImg, 180, 250);
-        drawCard(mainPanel, "9", clubImg, 270, 250);
-        drawCard(mainPanel, "3", heartImg, 360, 250);
-
+        
         add(mainPanel);
         setVisible(true);
     }
 
-    private void drawCard(JPanel panel, String value, Image suitImage, int x, int y) {
-        JPanel cardPanel = new JPanel();
+    private void drawCard(JPanel panel, Card card, int x, int y) {
+        
+    	// instead of asking for value and suitImage, find out by checking a Card
+    	int value = card.getValue();
+    	String suitedValue = "";
+		switch(card.getFace()) {
+		case 1: suitedValue = "J";break;
+		case 2: suitedValue = "Q";break;
+		case 3: suitedValue = "K";break;
+		case 0: suitedValue = ""+card.getValue();break;
+		} 
+    	Image suit;
+    	switch(card.getSuit()) {
+    	case HEARTS: 
+    		suit = heartImg;break;
+    	case SPADES:
+    		suit = spadeImg;break;
+    	case CLUBS:
+    		suit = clubImg;break;
+    	case DIAMONDS:
+    		suit = diamondImg;break;
+    	default: 
+    		suit = heartImg;
+    		System.out.println("Had to default");break;
+    		
+    	}
+    	
+    	
+    	JPanel cardPanel = new JPanel();
         cardPanel.setLayout(null);
         cardPanel.setBounds(x, y, 60, 80);
         cardPanel.setBackground(Color.WHITE);
         cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        JLabel valueLabel = new JLabel(value, SwingConstants.CENTER);
+        JLabel valueLabel = new JLabel(suitedValue, SwingConstants.CENTER);
         valueLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
         valueLabel.setForeground(Color.RED);
         valueLabel.setBounds(5, 5, 50, 30);
         cardPanel.add(valueLabel);
 
-        Image scaled = suitImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        Image scaled = suit.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         JLabel suitLabel = new JLabel(new ImageIcon(scaled));
         suitLabel.setBounds(20, 40, 20, 20);
         cardPanel.add(suitLabel);
