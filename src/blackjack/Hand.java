@@ -6,8 +6,16 @@ public class Hand {
 	
 	private ArrayList<Card> hand;
 	private int aces;
-
+	
+	public Hand() {
+		hand = new ArrayList<Card>();
+		aces = 0;
+	}
+	
 	public void take(Card card) {
+		if (card.getValue() == 1) { // ace
+			aces++;
+		}
 		hand.add(card);
 	}
 	
@@ -20,11 +28,7 @@ public class Hand {
 		int[] scores = new int [aces+1];
 		int acesCounted = aces;
 		
-		for (int score : scores) {
-			
-			
-			
-		}
+		
 		
  	}
 	
