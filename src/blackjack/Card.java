@@ -9,6 +9,7 @@ public class Card {
 	private Suit suit;
 	private int value; // 1 is an ace, 2-10 is the number, 11 is j, 12 is q, 13 is k
 	private int face; // 1 is j, 2 is q, 3 is k, 0 is nothing
+	private boolean flipped; // is the card showing or just its back?
 	
 	public Card(Suit suit, int value) {
 		this.suit = suit;
@@ -66,6 +67,18 @@ public class Card {
 	
 	public void setFace(int face) {
 		this.face = face;
+	}
+	
+	public void showBack() {
+		flipped = true;
+	}
+	
+	public void showFront() {
+		flipped = false;
+	}
+	
+	public boolean isFlipped() {
+		return flipped;
 	}
 	
 	/*
