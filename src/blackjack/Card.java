@@ -2,7 +2,7 @@ package blackjack;
 
 public class Card {
 
-	static enum Suit {
+	public static enum Suit {
 		HEARTS, DIAMONDS, SPADES, CLUBS
 	};
 	
