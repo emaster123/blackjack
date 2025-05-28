@@ -79,35 +79,36 @@ public class Gui extends JFrame implements ActionListener {
 		p.add(result);
 		
 		//Chip buttons
+		
 		chip10 = new JButton("$10");
-	    chip10.setPreferredSize(new Dimension(80, 30));
-	    chip10.setToolTipText("Vote for Tami");
+	    chip10.setPreferredSize(new Dimension(50, 70));
 	    chip10.addActionListener(this);
-	    chip10.setBounds(80, 30, 40, 40);
-
+	    chip10.setBounds(50, 200, 60, 60);	    
+	    chip10.setFont(new Font("Arial", Font.PLAIN, 12));
+	    
 	    chip25 = new JButton("$25");
-	    chip25.setPreferredSize(new Dimension(80, 70));
-	    chip25.setToolTipText("Vote for Brian");
+	    chip25.setPreferredSize(new Dimension(50, 120));
 	    chip25.addActionListener(this);
-	    chip10.setBounds(80, 70, 40, 40);
-
+	    chip25.setBounds(50, 270, 60, 60);
+	    chip25.setFont(new Font("Arial", Font.PLAIN, 12));
+	    
 	    chip50 = new JButton("$50");
-	    chip50.setPreferredSize(new Dimension(80, 110));
-	    chip50.setToolTipText("Vote for Liz");
+	    chip50.setPreferredSize(new Dimension(50, 170));
 	    chip50.addActionListener(this);
-	    chip10.setBounds(80, 70, 40, 40);
+	    chip50.setBounds(50, 340, 60, 60);
+	    chip50.setFont(new Font("Arial", Font.PLAIN, 12));
 	    
 	    chip100 = new JButton("$100");
-	    chip100.setPreferredSize(new Dimension(80, 150));
-	    chip100.setToolTipText("Vote for Brian");
+	    chip100.setPreferredSize(new Dimension(50, 220));
 	    chip100.addActionListener(this);
-	    chip10.setBounds(80, 110, 40, 40);
-
+	    chip100.setBounds(50, 410, 60, 60);
+	    chip100.setFont(new Font("Arial", Font.PLAIN, 10));
+	    
 	    chip500 = new JButton("$500");
-	    chip500.setPreferredSize(new Dimension(80, 190));
-	    chip500.setToolTipText("Vote for Liz");
+	    chip500.setPreferredSize(new Dimension(50, 270));
 	    chip500.addActionListener(this);
-	    chip10.setBounds(80, 150, 40, 40);
+	    chip500.setBounds(50, 480, 60, 60);
+	    chip500.setFont(new Font("Arial", Font.PLAIN, 10));
 
 	    add(chip10);
 	    add(chip25);
