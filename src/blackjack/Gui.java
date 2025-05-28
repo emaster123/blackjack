@@ -2,8 +2,10 @@ package blackjack;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Gui extends JFrame {
+public class Gui extends JFrame implements ActionListener {
 
 	// Suit images
 	private Image heartImg;
@@ -17,6 +19,20 @@ public class Gui extends JFrame {
 	private JLabel putIn;
 	private JLabel victory;
 	private JLabel result;
+	
+	//Chip Buttons
+	private JButton chip10;
+	private JButton chip25;
+	private JButton chip50;
+	private JButton chip100;
+	private JButton chip500;
+
+	//Chip pictures
+	private Image whiteChip;//10
+	private Image blueChip;//25
+	private Image redChip;//50
+	private Image greenChip;//100
+	private Image blackChip;//500
 	
 	public Gui() {
 		setTitle("Blackjack Game");
@@ -61,7 +77,40 @@ public class Gui extends JFrame {
 		result.setFont(new Font("SansSerif", Font.BOLD, 20));
 		result.setBounds(220, 140, 250, 30);
 		p.add(result);
+		
+		//Chip buttons
+		chip10 = new JButton("$10");
+	    chip10.setPreferredSize(new Dimension(80, 30));
+	    chip10.setToolTipText("Vote for Tami");
+	    chip10.addActionListener(this);
 
+	    chip25 = new JButton("$25");
+	    chip25.setPreferredSize(new Dimension(80, 30));
+	    chip25.setToolTipText("Vote for Brian");
+	    chip25.addActionListener(this);
+
+	    chip50 = new JButton("$50");
+	    chip50.setPreferredSize(new Dimension(80, 30));
+	    chip50.setToolTipText("Vote for Liz");
+	    chip50.addActionListener(this);
+	    
+	    chip100 = new JButton("$100");
+	    chip100.setPreferredSize(new Dimension(80, 30));
+	    chip100.setToolTipText("Vote for Brian");
+	    chip100.addActionListener(this);
+
+	    chip500 = new JButton("$500");
+	    chip500.setPreferredSize(new Dimension(80, 30));
+	    chip500.setToolTipText("Vote for Liz");
+	    chip500.addActionListener(this);
+
+	    add(chip10);
+	    add(chip25);
+	    add(chip50);
+	    add(chip100);
+		add(chip500);
+		
+		
 		add(p);
 		setVisible(true);
 	}
@@ -168,12 +217,32 @@ public class Gui extends JFrame {
 		// also neccessary for testing
 		repaint();
 	}
+	
+	
+	public void actionPerformed(ActionEvent e)
+	  {
+	    JButton button = (JButton)e.getSource();
+
+	    if (button == chip10)
+	    	System.out.println("add $10 to the bet");
+	    else if (button == chip25)
+	      System.out.println("add $25 to the bet");
+	    else if (button == chip50)
+	    	System.out.println("add $50 to the bet");
+	    else if (button == chip100)
+	    	System.out.println("add $100 to the bet");
+	    else if (button == chip500)
+	    	System.out.println("add $500 to the bet");
+	    
+	  }
+	
+
 	// for testing -->
-	public static void main(String[] args) {
-		Gui g = new Gui();
-        g.drawCard(new Card(Card.Suit.HEARTS, 10), 300, 100);
-        g.drawCard(new Card(Card.Suit.SPADES, 5), 370, 100);
-        g.drawCard(new Card(Card.Suit.DIAMONDS, 2), 440, 100);
-   
-	}
+		public static void main(String[] args) {
+			Gui g = new Gui();
+	        g.drawCard(new Card(Card.Suit.HEARTS, 10), 300, 100);
+	        g.drawCard(new Card(Card.Suit.SPADES, 5), 370, 100);
+	        g.drawCard(new Card(Card.Suit.DIAMONDS, 2), 440, 100);
+	   
+		}
 }
