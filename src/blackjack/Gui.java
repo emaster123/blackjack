@@ -230,6 +230,7 @@ public class Gui extends JFrame implements ActionListener {
 	    	System.out.println("add $100 to the bet");
 	    else if (button == chip500)
 	    	System.out.println("add $500 to the bet");
+	    
 	  }
 	
 
