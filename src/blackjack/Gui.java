@@ -165,6 +165,8 @@ public class Gui extends JFrame {
 		}
 
 		p.add(cardPanel);
+		// also neccessary for testing
+		repaint();
 	}
 	// for testing -->
 	public static void main(String[] args) {
@@ -172,5 +174,6 @@ public class Gui extends JFrame {
         g.drawCard(new Card(Card.Suit.HEARTS, 10), 300, 100);
         g.drawCard(new Card(Card.Suit.SPADES, 5), 370, 100);
         g.drawCard(new Card(Card.Suit.DIAMONDS, 2), 440, 100);
+   
 	}
 }
