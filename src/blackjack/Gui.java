@@ -21,8 +21,9 @@ public class Gui extends JFrame {
 	
 	public Gui() {
 		setTitle("Blackjack Game");
-		setSize(600, 400);
+		setSize(1000, 700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setLocationRelativeTo(null);
 
 		// Directly load suit images
