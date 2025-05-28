@@ -153,7 +153,7 @@ public class Gui extends JFrame {
 			JLabel valueLabel = new JLabel(suitedValue);
 			valueLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
 			valueLabel.setForeground(textColour);
-			valueLabel.setHorizontalAlignment(JLabel.CENTER); // simpler constant
+			valueLabel.setHorizontalAlignment(JLabel.CENTER);
 			valueLabel.setBounds(5, 5, 50, 30);
 			cardPanel.add(valueLabel);
 
@@ -167,5 +167,11 @@ public class Gui extends JFrame {
 
 		p.add(cardPanel);
 	}
-
+	// for testing -->
+	public static void main(String[] args) {
+		Gui g = new Gui();
+        g.drawCard(new Card(Card.Suit.HEARTS, 10), 300, 100);
+        g.drawCard(new Card(Card.Suit.SPADES, 5), 370, 100);
+        g.drawCard(new Card(Card.Suit.DIAMONDS, 2), 440, 100);
+	}
 }
