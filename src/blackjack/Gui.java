@@ -13,7 +13,6 @@ public class Gui extends JFrame {
 	private Image backImg;
 	
 	private JPanel p;
-
 	private JLabel chips;
 	private JLabel putIn;
 	private JLabel victory;
