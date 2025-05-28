@@ -83,26 +83,31 @@ public class Gui extends JFrame implements ActionListener {
 	    chip10.setPreferredSize(new Dimension(80, 30));
 	    chip10.setToolTipText("Vote for Tami");
 	    chip10.addActionListener(this);
+	    chip10.setBounds(80, 30, 200, 20);
 
 	    chip25 = new JButton("$25");
 	    chip25.setPreferredSize(new Dimension(80, 30));
 	    chip25.setToolTipText("Vote for Brian");
 	    chip25.addActionListener(this);
+	    chip10.setBounds(80, 30, 30, 30);
 
 	    chip50 = new JButton("$50");
-	    chip50.setPreferredSize(new Dimension(80, 30));
+	    chip50.setPreferredSize(new Dimension(80, 70));
 	    chip50.setToolTipText("Vote for Liz");
 	    chip50.addActionListener(this);
+	    chip10.setBounds(80, 70, 30, 30);
 	    
 	    chip100 = new JButton("$100");
-	    chip100.setPreferredSize(new Dimension(80, 30));
+	    chip100.setPreferredSize(new Dimension(80, 110));
 	    chip100.setToolTipText("Vote for Brian");
 	    chip100.addActionListener(this);
+	    chip10.setBounds(80, 110, 30, 30);
 
 	    chip500 = new JButton("$500");
-	    chip500.setPreferredSize(new Dimension(80, 30));
+	    chip500.setPreferredSize(new Dimension(80, 150));
 	    chip500.setToolTipText("Vote for Liz");
 	    chip500.addActionListener(this);
+	    chip10.setBounds(80, 150, 30, 30);
 
 	    add(chip10);
 	    add(chip25);
