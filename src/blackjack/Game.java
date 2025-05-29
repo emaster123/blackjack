@@ -18,12 +18,12 @@ public class Game {
 	
 	public int putIn(int stake) { // 0 is success, 1 is fail
 		if (stake > balance) {
-			return 0;
+			return 1;
 		} else {
 			this.stake += stake;
 			this.balance -= stake;
 			System.out.println("Put in $" + stake);
-			return 1;
+			return 0;
 		}
 	}
 	
