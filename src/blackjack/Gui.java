@@ -220,18 +220,22 @@ public class Gui extends JFrame implements ActionListener {
 
 		int buttonInt = Integer.parseInt(button.getText().substring(1));
 		
-		game.putIn(buttonInt);
+		int result = game.putIn(buttonInt);
+		
+		if (result == 1) {
+			JOptionPane.showMessageDialog(p, "Not enough money for that bet!","Brokey!",JOptionPane.PLAIN_MESSAGE);
+		}
 		
 		stake.setText("Stake: $"+game.getStake());
 		money.setText("Money: $"+game.getBalance());
 	}
 
 	// for testing -->
-	public static void main(String[] args) {
+//	public static void main(String[] args) {
 //			Gui g = new Gui();
 //	        g.drawCard(new Card(Card.Suit.HEARTS, 10), 300, 100);
 //	        g.drawCard(new Card(Card.Suit.SPADES, 5), 370, 100);
 //	        g.drawCard(new Card(Card.Suit.DIAMONDS, 2), 440, 100);
 //	   
-	}
+//	}
 }
