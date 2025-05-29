@@ -6,14 +6,8 @@ public class Hand {
 	
 	private ArrayList<Card> hand;
 	
-	private int cardNum; 
-	
 	public Hand() {
 		hand = new ArrayList<Card>();
-	}
-	
-	public int getCardNum() {
-		return cardNum; 
 	}
 	
 	public void take(Card card) {
