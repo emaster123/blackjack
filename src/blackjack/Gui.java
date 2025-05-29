@@ -227,11 +227,11 @@ public class Gui extends JFrame implements ActionListener {
 	}
 
 	// for testing -->
-	public static void main(String[] args) {
+//	public static void main(String[] args) {
 //			Gui g = new Gui();
 //	        g.drawCard(new Card(Card.Suit.HEARTS, 10), 300, 100);
 //	        g.drawCard(new Card(Card.Suit.SPADES, 5), 370, 100);
 //	        g.drawCard(new Card(Card.Suit.DIAMONDS, 2), 440, 100);
 //	   
-	}
+//	}
 }
