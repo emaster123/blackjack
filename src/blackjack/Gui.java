@@ -220,7 +220,11 @@ public class Gui extends JFrame implements ActionListener {
 
 		int buttonInt = Integer.parseInt(button.getText().substring(1));
 		
-		game.putIn(buttonInt);
+		int result = game.putIn(buttonInt);
+		
+		if (result == 1) {
+			JOptionPane.showMessageDialog(p, "Not enough money for that bet!","Brokey!",JOptionPane.PLAIN_MESSAGE);
+		}
 		
 		stake.setText("Stake: $"+game.getStake());
 		money.setText("Money: $"+game.getBalance());
