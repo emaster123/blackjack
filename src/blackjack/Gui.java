@@ -8,33 +8,21 @@ import java.awt.event.ActionListener;
 public class Gui extends JFrame implements ActionListener {
 
 	// Suit images
-	private Image heartImg;
-	private Image spadeImg;
-	private Image diamondImg;
-	private Image clubImg;
-	private Image backImg;
-	
-	private JPanel p;
-	private JLabel chips;
-	private JLabel putIn;
-	private JLabel victory;
-	private JLabel result;
-	
-	//Chip Buttons
-	private JButton chip10;
-	private JButton chip25;
-	private JButton chip50;
-	private JButton chip100;
-	private JButton chip500;
+	private Image heartImg, spadeImg, diamondImg, clubImg, backImg;
 
-	//Chip pictures
-	private Image whiteChip;//10
-	private Image blueChip;//25
-	private Image redChip;//50
-	private Image greenChip;//100
-	private Image blackChip;//500
-	
-	public Gui() {
+	private JPanel p;
+
+	private JLabel money, stake, victory, result;
+
+	// Chip Buttons
+	private JButton chip10, chip25, chip50, chip100, chip500;
+
+	// Chip pictures
+	private Image whiteChip, blueChip, redChip, greenChip, blackChip;// 500
+
+	private Game game;
+
+	public Gui(Game game) {
 		setTitle("Blackjack Game");
 		setSize(1000, 700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,22 +36,24 @@ public class Gui extends JFrame implements ActionListener {
 		clubImg = new ImageIcon("club.png").getImage();
 		backImg = new ImageIcon("Back.png").getImage();
 
+		this.game = game;
+
 		p = new JPanel();
 		p.setBackground(Color.GREEN.darker()); // Green background
 		p.setLayout(null);
 
 		// Chips
-		chips = new JLabel("Money");
-		chips.setBounds(30, 40, 100, 40);
-		chips.setFont(new Font("SansSerif", Font.PLAIN, 24));
-		p.add(chips);
+		money = new JLabel("Money: $600");
+		money.setBounds(30, 40, 300, 40);
+		money.setFont(new Font("SansSerif", Font.PLAIN, 24));
+		p.add(money);
 
 		// Stake info
-		putIn = new JLabel("Stake: $x");
-		putIn.setForeground(Color.YELLOW);
-		putIn.setFont(new Font("SansSerif", Font.BOLD, 14));
-		putIn.setBounds(30, 100, 200, 20);
-		p.add(putIn);
+		stake = new JLabel("Stake: $x");
+		stake.setForeground(Color.YELLOW);
+		stake.setFont(new Font("SansSerif", Font.BOLD, 14));
+		stake.setBounds(30, 100, 200, 20);
+		p.add(stake);
 
 		victory = new JLabel("You won: $x");
 		victory.setForeground(Color.YELLOW);
@@ -77,49 +67,50 @@ public class Gui extends JFrame implements ActionListener {
 		result.setFont(new Font("SansSerif", Font.BOLD, 20));
 		result.setBounds(220, 140, 250, 30);
 		p.add(result);
-		
-		//Chip buttons
-		
-		chip10 = new JButton("$10");
-	    chip10.setPreferredSize(new Dimension(50, 70));
-	    chip10.addActionListener(this);
-	    chip10.setBounds(50, 200, 60, 60);	    
-	    chip10.setFont(new Font("Arial", Font.PLAIN, 12));
-	    
-	    chip25 = new JButton("$25");
-	    chip25.setPreferredSize(new Dimension(50, 120));
-	    chip25.addActionListener(this);
-	    chip25.setBounds(50, 270, 60, 60);
-	    chip25.setFont(new Font("Arial", Font.PLAIN, 12));
-	    
-	    chip50 = new JButton("$50");
-	    chip50.setPreferredSize(new Dimension(50, 170));
-	    chip50.addActionListener(this);
-	    chip50.setBounds(50, 340, 60, 60);
-	    chip50.setFont(new Font("Arial", Font.PLAIN, 12));
-	    
-	    chip100 = new JButton("$100");
-	    chip100.setPreferredSize(new Dimension(50, 220));
-	    chip100.addActionListener(this);
-	    chip100.setBounds(50, 410, 60, 60);
-	    chip100.setFont(new Font("Arial", Font.PLAIN, 10));
-	    
-	    chip500 = new JButton("$500");
-	    chip500.setPreferredSize(new Dimension(50, 270));
-	    chip500.addActionListener(this);
-	    chip500.setBounds(50, 480, 60, 60);
-	    chip500.setFont(new Font("Arial", Font.PLAIN, 10));
 
-	    add(chip10);
-	    add(chip25);
-	    add(chip50);
-	    add(chip100);
+		// Chip buttons
+
+		chip10 = new JButton("$10");
+		chip10.setPreferredSize(new Dimension(50, 70));
+		chip10.addActionListener(this);
+		chip10.setBounds(50, 200, 60, 60);
+		chip10.setFont(new Font("Arial", Font.PLAIN, 12));
+
+		chip25 = new JButton("$25");
+		chip25.setPreferredSize(new Dimension(50, 120));
+		chip25.addActionListener(this);
+		chip25.setBounds(50, 270, 60, 60);
+		chip25.setFont(new Font("Arial", Font.PLAIN, 12));
+
+		chip50 = new JButton("$50");
+		chip50.setPreferredSize(new Dimension(50, 170));
+		chip50.addActionListener(this);
+		chip50.setBounds(50, 340, 60, 60);
+		chip50.setFont(new Font("Arial", Font.PLAIN, 12));
+
+		chip100 = new JButton("$100");
+		chip100.setPreferredSize(new Dimension(50, 220));
+		chip100.addActionListener(this);
+		chip100.setBounds(50, 410, 60, 60);
+		chip100.setFont(new Font("Arial", Font.PLAIN, 10));
+
+		chip500 = new JButton("$500");
+		chip500.setPreferredSize(new Dimension(50, 270));
+		chip500.addActionListener(this);
+		chip500.setBounds(50, 480, 60, 60);
+		chip500.setFont(new Font("Arial", Font.PLAIN, 10));
+
+		add(chip10);
+		add(chip25);
+		add(chip50);
+		add(chip100);
 		add(chip500);
-		
-		
+
 		add(p);
 		setVisible(true);
 	}
+
+	// add a popup to ask for stake
 
 	public void drawCard(Card card, int x, int y) {
 
@@ -223,32 +214,24 @@ public class Gui extends JFrame implements ActionListener {
 		// also neccessary for testing
 		repaint();
 	}
-	
-	
-	public void actionPerformed(ActionEvent e)
-	  {
-	    JButton button = (JButton)e.getSource();
 
-	    if (button == chip10)
-	    	System.out.println("add $10 to the bet");
-	    else if (button == chip25)
-	      System.out.println("add $25 to the bet");
-	    else if (button == chip50)
-	    	System.out.println("add $50 to the bet");
-	    else if (button == chip100)
-	    	System.out.println("add $100 to the bet");
-	    else if (button == chip500)
-	    	System.out.println("add $500 to the bet");
-	    
-	  }
-	
+	public void actionPerformed(ActionEvent e) {
+		JButton button = (JButton) e.getSource();
+
+		int buttonInt = Integer.parseInt(button.getText().substring(1));
+		
+		game.putIn(buttonInt);
+		
+		stake.setText("Stake: $"+game.getStake());
+		money.setText("Money: $"+game.getBalance());
+	}
 
 	// for testing -->
-		public static void main(String[] args) {
-			Gui g = new Gui();
-	        g.drawCard(new Card(Card.Suit.HEARTS, 10), 300, 100);
-	        g.drawCard(new Card(Card.Suit.SPADES, 5), 370, 100);
-	        g.drawCard(new Card(Card.Suit.DIAMONDS, 2), 440, 100);
-	   
-		}
+	public static void main(String[] args) {
+//			Gui g = new Gui();
+//	        g.drawCard(new Card(Card.Suit.HEARTS, 10), 300, 100);
+//	        g.drawCard(new Card(Card.Suit.SPADES, 5), 370, 100);
+//	        g.drawCard(new Card(Card.Suit.DIAMONDS, 2), 440, 100);
+//	   
+	}
 }
