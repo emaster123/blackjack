@@ -18,8 +18,11 @@ public class Gui extends JFrame implements ActionListener {
 	private JButton chip10, chip25, chip50, chip100, chip500;
 
 	// Chip pictures
-	private Image whiteChip, blueChip, redChip, greenChip, blackChip;// 500
+	private ImageIcon whiteChip, blueChip, redChip, greenChip, blackChip;// 500
 
+	//Stand/hit/double buttons
+	private JButton stand, hit, doubleBet;
+	
 	private Game game;
 	
 	// card coordinates
@@ -39,6 +42,9 @@ public class Gui extends JFrame implements ActionListener {
 		diamondImg = new ImageIcon("diamond.png").getImage();
 		clubImg = new ImageIcon("club.png").getImage();
 		backImg = new ImageIcon("Back.png").getImage();
+		
+		//Directly load chip images
+		//whiteChip = new ImageIcon("10$_PokerChipImg.png").getImage();
 
 		this.game = game;
 
@@ -110,6 +116,32 @@ public class Gui extends JFrame implements ActionListener {
 		add(chip100);
 		add(chip500);
 
+		
+		//Stand, hit, and double buttons
+
+		stand = new JButton("Stand");
+		stand.setPreferredSize(new Dimension(100, 100));
+		stand.addActionListener(this);
+		stand.setBounds(50, 570, 75, 75);
+		stand.setFont(new Font("Arial", Font.PLAIN, 14));
+
+    	hit = new JButton("Hit");
+    	hit.setPreferredSize(new Dimension(100, 100));
+    	hit.addActionListener(this);
+    	hit.setBounds(150, 570, 75, 75);
+    	hit.setFont(new Font("Arial", Font.PLAIN, 14));
+
+		doubleBet = new JButton("Double");
+		doubleBet.setPreferredSize(new Dimension(100, 100));
+		doubleBet.addActionListener(this);
+		doubleBet.setBounds(250, 570, 75, 75);
+		doubleBet.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		add(stand);
+		add(hit);
+		add(doubleBet);
+		
+		
 		add(p);
 		setVisible(true);
 	}
@@ -236,15 +268,22 @@ public class Gui extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();
-
-		int buttonInt = Integer.parseInt(button.getText().substring(1));
 		
-		int result = game.putIn(buttonInt);
-		
-		if (result == 1) {
-			JOptionPane.showMessageDialog(p, "Not enough money for that bet!","Brokey!",JOptionPane.PLAIN_MESSAGE);
+		if (button.equals(stand)) {
+			JOptionPane.showMessageDialog(p, "Pussy boy is standing", "No balls", JOptionPane.PLAIN_MESSAGE);
 		}
-		
+		else if (button.equals(hit)) {
+			JOptionPane.showMessageDialog(p, "Gimme another card", "Ballsy", JOptionPane.PLAIN_MESSAGE);
+		}
+		else if (button.equals(doubleBet)) {
+			JOptionPane.showMessageDialog(p, "Gimme another card and take my money", "Ballsier", JOptionPane.PLAIN_MESSAGE);
+		} else {
+			int buttonInt = Integer.parseInt(button.getText().substring(1));
+			int result = game.putIn(buttonInt);		
+			if (result == 1) {
+				JOptionPane.showMessageDialog(p, "Not enough money for that bet!","Brokey!",JOptionPane.PLAIN_MESSAGE);
+			}
+		}
 		stake.setText("Stake: $"+game.getStake());
 		money.setText("Money: $"+game.getBalance());
 	}
