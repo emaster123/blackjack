@@ -21,6 +21,10 @@ public class Gui extends JFrame implements ActionListener {
 	private Image whiteChip, blueChip, redChip, greenChip, blackChip;// 500
 
 	private Game game;
+	
+	// card coordinates
+	private int dealerX = 400, playerX = 400;  
+	private final int DECKX = 700, DECKY = 300, DEALERY = 100, PLAYERY = 550;
 
 	public Gui(Game game) {
 		setTitle("Blackjack Game");
@@ -112,10 +116,25 @@ public class Gui extends JFrame implements ActionListener {
 
 	// add a popup to ask for stake
 
-	public void drawCard(Card card, int x, int y) {
+	public void drawCard(Card card, int holder) {
 
 		// instead of asking for value and suitImage, find out by checking a Card
-
+		int x = 0;
+		int y = 0;
+		if (holder == 0) {
+			x = dealerX;
+			y = DEALERY;
+			dealerX += 80;
+		}
+		if (holder == 1) {
+			x = playerX;
+			y = PLAYERY;
+			playerX += 80;
+		}
+		if (holder == 2) {
+			x = DECKX;
+			y = DECKY;
+		}
 		JPanel cardPanel;
 		Color textColour;
 
@@ -141,7 +160,7 @@ public class Gui extends JFrame implements ActionListener {
 
 			cardPanel = new JPanel();
 			cardPanel.setLayout(null);
-			cardPanel.setBounds(x, y, 60, 80);
+			cardPanel.setBounds(x, 80, 60, 80);
 			cardPanel.setBackground(Color.WHITE);
 			cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -229,13 +248,4 @@ public class Gui extends JFrame implements ActionListener {
 		stake.setText("Stake: $"+game.getStake());
 		money.setText("Money: $"+game.getBalance());
 	}
-
-	// for testing -->
-//	public static void main(String[] args) {
-//			Gui g = new Gui();
-//	        g.drawCard(new Card(Card.Suit.HEARTS, 10), 300, 100);
-//	        g.drawCard(new Card(Card.Suit.SPADES, 5), 370, 100);
-//	        g.drawCard(new Card(Card.Suit.DIAMONDS, 2), 440, 100);
-//	   
-//	}
 }
