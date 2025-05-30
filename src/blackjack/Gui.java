@@ -15,10 +15,10 @@ public class Gui extends JFrame implements ActionListener {
 	private JLabel money, stake, victory, result;
 
 	// Chip Buttons
-	private JButton chip10, chip25, chip50, chip100, chip500;
+	private JButton chip1, chip5, chip10, chip25, chip50, chip100;
 
 	// Chip pictures
-	private ImageIcon whiteChip, blueChip, redChip, greenChip, blackChip;// 500
+	private Image whiteChip1, redChip5, blueChip10, greenChip25, blueChip50, blackChip100;
 
 	//Stand/hit/double buttons
 	private JButton stand, hit, doubleBet;
@@ -44,8 +44,13 @@ public class Gui extends JFrame implements ActionListener {
 		backImg = new ImageIcon("Back.png").getImage();
 		
 		//Directly load chip images
-		//whiteChip = new ImageIcon("10$_PokerChipImg.png").getImage();
-
+		whiteChip1 = new ImageIcon("").getImage();
+		redChip5 = new ImageIcon("").getImage();
+		blueChip10 = new ImageIcon("").getImage();
+		greenChip25 = new ImageIcon("").getImage();
+		blueChip50 = new ImageIcon("10$_PokerChipImg.png").getImage();
+		blackChip100 = new ImageIcon("").getImage();
+		
 		this.game = game;
 
 		p = new JPanel();
@@ -54,7 +59,7 @@ public class Gui extends JFrame implements ActionListener {
 
 		// Chips
 		money = new JLabel("Money: $600");
-		money.setBounds(30, 40, 300, 40);
+		money.setBounds(30, 10, 300, 40);
 		money.setFont(new Font("SansSerif", Font.PLAIN, 24));
 		p.add(money);
 
@@ -62,13 +67,13 @@ public class Gui extends JFrame implements ActionListener {
 		stake = new JLabel("Stake: $x");
 		stake.setForeground(Color.YELLOW);
 		stake.setFont(new Font("SansSerif", Font.BOLD, 14));
-		stake.setBounds(30, 100, 200, 20);
+		stake.setBounds(30, 70, 200, 20);
 		p.add(stake);
 
 		victory = new JLabel("You won: $x");
 		victory.setForeground(Color.YELLOW);
 		victory.setFont(new Font("SansSerif", Font.BOLD, 14));
-		victory.setBounds(30, 120, 200, 20);
+		victory.setBounds(30, 90, 200, 20);
 		p.add(victory);
 
 		// Bust message
@@ -80,42 +85,48 @@ public class Gui extends JFrame implements ActionListener {
 
 		// Chip buttons
 
+		chip1 = new JButton("$1");
+		chip1.setPreferredSize(new Dimension(50, 70));
+		chip1.addActionListener(this);
+		chip1.setBounds(50, 130, 60, 60);
+		chip1.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		chip5 = new JButton("5");
+		chip5.setPreferredSize(new Dimension(50, 70));
+		chip5.addActionListener(this);
+		chip5.setBounds(50, 210, 60, 60);
+		chip5.setFont(new Font("Arial", Font.PLAIN, 12)); 
+		
 		chip10 = new JButton("$10");
 		chip10.setPreferredSize(new Dimension(50, 70));
 		chip10.addActionListener(this);
-		chip10.setBounds(50, 200, 60, 60);
+		chip10.setBounds(50, 280, 60, 60);
 		chip10.setFont(new Font("Arial", Font.PLAIN, 12));
 
 		chip25 = new JButton("$25");
 		chip25.setPreferredSize(new Dimension(50, 120));
 		chip25.addActionListener(this);
-		chip25.setBounds(50, 270, 60, 60);
+		chip25.setBounds(50, 350, 60, 60);
 		chip25.setFont(new Font("Arial", Font.PLAIN, 12));
 
 		chip50 = new JButton("$50");
 		chip50.setPreferredSize(new Dimension(50, 170));
 		chip50.addActionListener(this);
-		chip50.setBounds(50, 340, 60, 60);
+		chip50.setBounds(50, 420, 60, 60);
 		chip50.setFont(new Font("Arial", Font.PLAIN, 12));
 
 		chip100 = new JButton("$100");
 		chip100.setPreferredSize(new Dimension(50, 220));
 		chip100.addActionListener(this);
-		chip100.setBounds(50, 410, 60, 60);
+		chip100.setBounds(50, 490, 60, 60);
 		chip100.setFont(new Font("Arial", Font.PLAIN, 10));
 
-		chip500 = new JButton("$500");
-		chip500.setPreferredSize(new Dimension(50, 270));
-		chip500.addActionListener(this);
-		chip500.setBounds(50, 480, 60, 60);
-		chip500.setFont(new Font("Arial", Font.PLAIN, 10));
-
+		add(chip1);
+		add(chip5);
 		add(chip10);
 		add(chip25);
 		add(chip50);
 		add(chip100);
-		add(chip500);
-
 		
 		//Stand, hit, and double buttons
 
@@ -148,7 +159,7 @@ public class Gui extends JFrame implements ActionListener {
 
 	// add a popup to ask for stake
 
-	public void drawCard(Card card, int holder) {
+	public void drawCard(Card card, int holder) { // 0, 1, 2, are the dealer, player, deck, respectively
 
 		// instead of asking for value and suitImage, find out by checking a Card
 		int x = 0;
