@@ -21,13 +21,13 @@ public class Gui extends JFrame implements ActionListener {
 	private Image whiteChip1, redChip5, blueChip10, greenChip25, blueChip50, blackChip100;
 
 	//Stand/hit/double buttons
-	private JButton stand, hit, doubleBet;
+	private JButton stand, hit, doubleBet, allIn;
 	
 	private Game game;
 	
 	// card coordinates
-	private int dealerX = 400, playerX = 400;  
-	private final int DECKX = 700, DECKY = 300, DEALERY = 100, PLAYERY = 550;
+	private int dealerX = 500, playerX = 500;  
+	private final int DECKX = 800, DECKY = 300, DEALERY = 100, PLAYERY = 550;
 
 	public Gui(Game game) {
 		setTitle("Blackjack Game");
@@ -91,7 +91,7 @@ public class Gui extends JFrame implements ActionListener {
 		chip1.setBounds(50, 130, 60, 60);
 		chip1.setFont(new Font("Arial", Font.PLAIN, 12));
 		
-		chip5 = new JButton("5");
+		chip5 = new JButton("$5");
 		chip5.setPreferredSize(new Dimension(50, 70));
 		chip5.addActionListener(this);
 		chip5.setBounds(50, 210, 60, 60);
@@ -148,10 +148,16 @@ public class Gui extends JFrame implements ActionListener {
 		doubleBet.setBounds(250, 570, 75, 75);
 		doubleBet.setFont(new Font("Arial", Font.PLAIN, 12));
 		
+		allIn = new JButton("All In");
+		allIn.setPreferredSize(new Dimension(100, 100));
+		allIn.addActionListener(this);
+		allIn.setBounds(350, 570, 75, 75);
+		allIn.setFont(new Font("Arial", Font.PLAIN, 12));
+		
 		add(stand);
 		add(hit);
 		add(doubleBet);
-		
+		add(allIn);
 		
 		add(p);
 		setVisible(true);
