@@ -18,7 +18,7 @@ public class Gui extends JFrame implements ActionListener {
 	private JButton chip1, chip5, chip10, chip25, chip50, chip100;
 
 	// Chip pictures
-	private Image whiteChip1, redChip5, blueChip10, greenChip25, blueChip50, blackChip100;
+	private Image whiteChip1, redChip5, blueChip10, greenChip25, orangeChip50, blackChip100;
 
 	// Stand/hit/double buttons
 	private JButton stand, hit, doubleBet, allIn;
@@ -44,12 +44,12 @@ public class Gui extends JFrame implements ActionListener {
 		backImg = new ImageIcon("Back.png").getImage();
 
 		// Directly load chip images
-		whiteChip1 = new ImageIcon("").getImage();
-		redChip5 = new ImageIcon("").getImage();
-		blueChip10 = new ImageIcon("").getImage();
-		greenChip25 = new ImageIcon("").getImage();
-		blueChip50 = new ImageIcon("10$_PokerChipImg.png").getImage();
-		blackChip100 = new ImageIcon("").getImage();
+		whiteChip1 = new ImageIcon("whiteChip1.png").getImage();
+		redChip5 = new ImageIcon("redChip5.png").getImage();
+		blueChip10 = new ImageIcon("10$_PokerChipImg.png").getImage();
+		greenChip25 = new ImageIcon("greenChip25.png").getImage();
+		orangeChip50 = new ImageIcon("orangeChip50.png").getImage();
+		blackChip100 = new ImageIcon("blackChip100.png").getImage();
 
 		this.game = game;
 
