@@ -278,6 +278,7 @@ public class Gui extends JFrame implements ActionListener {
 			cardPanel.add(suitLabel);
 
 		}
+		// tested all the chip images and they're all good now
 		Image scl = blackChip100.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
 		// scales it to normal size, part of our research
 		JLabel chipPic = new JLabel(new ImageIcon(scl));
