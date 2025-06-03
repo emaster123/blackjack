@@ -294,7 +294,7 @@ public class Gui extends JFrame implements ActionListener {
 		JButton button = (JButton) e.getSource();
 
 		if (button.equals(stand)) {
-			JOptionPane.showMessageDialog(p, "Pussy boy is standing", "No balls", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(p, "Pussy boy is standing", "No balls", JOptionPane.WARNING_MESSAGE);
 		} else if (button.equals(hit)) {
 			JOptionPane.showMessageDialog(p, "Gimme another card", "Ballsy", JOptionPane.PLAIN_MESSAGE);
 		} else if (button.equals(doubleBet)) {
