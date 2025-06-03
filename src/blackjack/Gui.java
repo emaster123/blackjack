@@ -46,7 +46,7 @@ public class Gui extends JFrame implements ActionListener {
 		// Directly load chip images
 		whiteChip1 = new ImageIcon("whiteChip1.png").getImage();
 		redChip5 = new ImageIcon("redChip5.png").getImage();
-		blueChip10 = new ImageIcon("10$_PokerChipImg.png").getImage();
+		blueChip10 = new ImageIcon("blueChip10.png").getImage();
 		greenChip25 = new ImageIcon("greenChip25.png").getImage();
 		orangeChip50 = new ImageIcon("orangeChip50.png").getImage();
 		blackChip100 = new ImageIcon("blackChip100.png").getImage();
@@ -278,7 +278,13 @@ public class Gui extends JFrame implements ActionListener {
 			cardPanel.add(suitLabel);
 
 		}
-
+		Image scl = blackChip100.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+		// scales it to normal size, part of our research
+		JLabel chipPic = new JLabel(new ImageIcon(scl));
+		chipPic.setBounds(300, 200, 300, 300);
+		p.add(chipPic);
+		
+		
 		p.add(cardPanel);
 		// also neccessary for testing
 		repaint();
