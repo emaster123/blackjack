@@ -85,7 +85,6 @@ public class Gui extends JFrame implements ActionListener {
 		//wero rjgwer-owj er-g 2er g2
 
 		// Chip buttons
-
 		chip1 = new JButton("$1");
 		chip1.setPreferredSize(new Dimension(50, 70));
 		chip1.addActionListener(this);
