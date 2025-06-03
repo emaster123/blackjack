@@ -82,6 +82,7 @@ public class Gui extends JFrame implements ActionListener {
 		result.setFont(new Font("SansSerif", Font.BOLD, 20));
 		result.setBounds(220, 140, 250, 30);
 		p.add(result);
+		//wero rjgwer-owj er-g 2er g2
 
 		// Chip buttons
 
