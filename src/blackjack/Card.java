@@ -81,12 +81,6 @@ public class Card {
 		return flipped;
 	}
 	
-	/*
-	 * makeImage method:
-	 * Generate an image through checking face, value, and suit to avoid having 52 files
-	 * copy the craps dice draw method
-	 */
-	
 			
 				
 	

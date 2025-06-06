@@ -9,19 +9,39 @@ public class Blackjack {
 		
 		Hand player = new Hand();
 		Hand dealer = new Hand();
+		Deck deck;
+		Card currCard;
+		Card deckCard;
+		Card holeCard;
 		
-		Game game = new Game(player, dealer);
+		deck = new Deck();
+		
+		Game game = new Game(player, dealer, deck);
 		
 		Gui table = new Gui(game);
-		Card c = new Card(Card.Suit.HEARTS, 10);
-		Card d = new Card(Card.Suit.SPADES, 3);
-		Card e = new Card(Card.Suit.DIAMONDS, 2);
-		Card f = new Card(Card.Suit.CLUBS, 2);
-		table.drawCard(c, 0);
-		table.drawCard(d, 1);
-		table.drawCard(e, 2);
-		table.drawCard(f, 1);
 		
-				
+		// game sequence
+		
+		deckCard = new Card(Card.Suit.CLUBS, 1);
+		deckCard.showBack();
+		table.drawCard(deckCard, 2);
+		
+		currCard = deck.deal();
+		player.take(currCard);
+		table.drawCard(currCard, 1);
+	
+		currCard = deck.deal();
+		dealer.take(currCard);
+		table.drawCard(currCard, 0);
+		
+		currCard = deck.deal();
+		player.take(currCard);
+		table.drawCard(currCard, 1);
+		
+		holeCard = deck.deal();
+		holeCard.showBack();
+		dealer.take(holeCard);
+		table.drawCard(holeCard, 3);
+					
 	}	
 }

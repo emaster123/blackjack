@@ -1,69 +1,105 @@
-package blackjack;
+		package blackjack;
+
+import java.util.ArrayList;
 
 public class Game {
 	
-	private int stake, winnings, balance;
-	private Deck deck;
+	private int stake, winnings, balance, multiplier;
 	private Hand player, dealer;
+	private Deck deck;
 	private String result; // corresponds to win/bj/bust/push
 	
-	public Game(Hand player, Hand dealer) {
+	public Game(Hand player, Hand dealer, Deck deck) {
 		stake = 0;
 		winnings = 0;
 		balance = 600;
 		this.player = player;
 		this.dealer = dealer;
-		this.deck = new Deck();
+		this.deck = deck;
+		
 	}
 	
-	public int putIn(int stake) { // 0 is success, 1 is fail
+	public boolean putIn(int stake) { // true is success, false is fail
 		if (stake > balance) {
-			return 1;
+			return false;
 		} else {
 			this.stake += stake;
 			this.balance -= stake;
 			System.out.println("Put in $" + stake);
-			return 0;
+			return true;
 		}
 	}
 	
 	public void win() {
-		winnings = stake*2;
+		winnings = stake*multiplier;
 		stake = 0;
 		balance += winnings;
 	}
 	
 
-	public int compare() { // 0 is player's win, 1 is dealer's win, 2 is no one's win
+	/*
+	 * First: 1 is dealer, 2 is player, 3 is neither
+	 * Second: 1 is Blackjack!, 2 is bust (and other hand's win), 3 is win by higher numer
+	 */
+	
+	public int compare() { 
+		// 0 is player's win, 1 is dealer's win, 2 is no one's win, 3 is player busts
 		
-		int playerScore = player.getScore(0);
-		int dealerScore = dealer.getScore(0);
+		int playerScore = player.getScore();
+		int dealerScore = dealer.getScore();
+		
+		System.out.println("Player has a " + playerScore + "\nDealer has a " + dealerScore);
 		
 		if (playerScore == dealerScore) {
 			// push
-			return 2;
+			return 30;
 		} else if (playerScore == 21) {
 			// bj
-			return 0;
+			return 21;
 		} else if (dealerScore == 21) {
 			// bj
-			return 1;
+			return 11;
 		} else if (playerScore > 21) {
 			// busts
-			return 1;
+			return 22;
 		} else if (dealerScore > 21) {
 			// busts
-			return 1;
+			return 12;
 		} else if (playerScore > dealerScore) {
 			// player has better cards
-			return 0;
+			return 23;
 		} else {
 			// dealer has better cards
-			return 1;
+			return 13;
 		}
 		
 	}
 	
+	public Card hit() {
+		System.out.println("Hitting (game.java)");
+		Card c = deck.deal();
+		player.take(c);
+		return c;
+	};
+	
+	public ArrayList<Card> stand() {
+	
+		Card c;
+		ArrayList<Card> cardsToDraw = new ArrayList<>();
+		
+		while (dealer.getScore() < 17) {
+			
+			c = deck.deal();
+			System.out.println("The dealer has a score less than 17, he draws a " + c);
+			dealer.take(c);
+			cardsToDraw.add(c);
+			
+		}
+		
+		System.out.println("In total, " + cardsToDraw.size() + " cards should be drawn");
+		return cardsToDraw;
+		
+	}
 	public int getStake() {
 		return stake;
 	}
@@ -74,6 +110,10 @@ public class Game {
 	
 	public int getBalance() {
 		return balance;
+	}
+	
+	public int getScore() {
+		return player.getScore();
 	}
 	
 }

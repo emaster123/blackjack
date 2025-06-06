@@ -14,27 +14,33 @@ public class Hand {
 		hand.add(card);
 	}
 	
-	public void take(Deck deck) {
-		hand.add(deck.deal());
-	}
-	
 	public ArrayList<Card> getHand() {
 		return hand;
 	}
 	
-	public int getScore(int move) { // 0 is stand, 1 is hit 
+	public int getScore() { 
 		
 		int score = 0;
-		
-		int valueOfAce = 11 - move*10; // if standing, then go for 11 (11 - 0*10). if hitting, go for 1 (11 - 1*10)
+		int numOfAces = 0;
 		
 		for (Card card : hand) {
+
 			if (card.getValue() == 1) {
-				score += valueOfAce;
+				numOfAces++;
 			} else {
 				score += card.getValue();
 			}
 		}
+		
+		
+		for (int i = 0; numOfAces > i; i++) {
+			if (score < 10) {
+				score+=11;
+			} else {
+				score ++;
+			}
+		}	
+
 		
 		return score;
 		
