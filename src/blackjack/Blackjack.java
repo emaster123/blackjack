@@ -1,5 +1,9 @@
 package blackjack;
 
+/*
+ * By Daniel Cotop, David Shklyarman and Eli Liskovich
+ */
+
 public class Blackjack {
 	
 	final static int H = 700;
@@ -11,7 +15,7 @@ public class Blackjack {
 		Hand dealer = new Hand();
 		Deck deck;
 		Card currCard;
-		Card deckCard;
+		Card deckCard; 
 		Card holeCard;
 		
 		deck = new Deck();
