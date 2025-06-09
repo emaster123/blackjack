@@ -10,24 +10,26 @@ public class Gui extends JFrame implements ActionListener {
 	// Suit images
 	private Image heartImg, spadeImg, diamondImg, clubImg, backImg;
 
-	private JPanel p;
+	private JPanel p, holeCardDrawing;
 
-	private JLabel money, stake, victory, result;
+	private JLabel money, stake, victory, result; 
+	
+	private Card holeCard; // save it to flip it
 
 	// Chip Buttons
 	private JButton chip1, chip5, chip10, chip25, chip50, chip100;
 
 	// Chip pictures
 	private Image whiteChip1, redChip5, blueChip10, greenChip25, orangeChip50, blackChip100;
-
+	
 	// Stand/hit/double buttons
-	private JButton stand, hit, doubleBet, allIn;
+	private JButton stand, hit, doubleBet;
 
 	private Game game;
-
+	
 	// card coordinates
 	private int dealerX = 500, playerX = 500;
-	private final int DECKX = 800, DECKY = 300, DEALERY = 100, PLAYERY = 550;
+	private final int DECKX = 800, DECKY = 300, DEALERY = 100, PLAYERY = 550, HOLEX = 580;
 
 	public Gui(Game game) {
 		setTitle("Blackjack Game");
@@ -54,23 +56,24 @@ public class Gui extends JFrame implements ActionListener {
 		this.game = game;
 
 		p = new JPanel();
-		p.setBackground(Color.GREEN.darker()); // Green background
+		p.setBackground(Color.GREEN.darker().darker()); // Green background
 		p.setLayout(null);
 
 		// Chips
 		money = new JLabel("Money: $600");
 		money.setBounds(30, 10, 300, 40);
-		money.setFont(new Font("SansSerif", Font.PLAIN, 24));
+		money.setForeground(Color.YELLOW);
+		money.setFont(new Font("SansSerif", Font.BOLD, 24));
 		p.add(money);
 
 		// Stake info
-		stake = new JLabel("Stake: $x");
+		stake = new JLabel("Stake: $0");
 		stake.setForeground(Color.YELLOW);
 		stake.setFont(new Font("SansSerif", Font.BOLD, 14));
 		stake.setBounds(30, 70, 200, 20);
 		p.add(stake);
 
-		victory = new JLabel("You won: $x");
+		victory = new JLabel("You won: $0");
 		victory.setForeground(Color.YELLOW);
 		victory.setFont(new Font("SansSerif", Font.BOLD, 14));
 		victory.setBounds(30, 90, 200, 20);
@@ -82,9 +85,9 @@ public class Gui extends JFrame implements ActionListener {
 		result.setFont(new Font("SansSerif", Font.BOLD, 20));
 		result.setBounds(220, 140, 250, 30);
 		p.add(result);
-		//wero rjgwer-owj er-g 2er g2
-
+		
 		// Chip buttons
+
 		chip1 = new JButton("$1");
 		chip1.setPreferredSize(new Dimension(50, 70));
 		chip1.addActionListener(this);
@@ -147,17 +150,10 @@ public class Gui extends JFrame implements ActionListener {
 		doubleBet.addActionListener(this);
 		doubleBet.setBounds(250, 570, 75, 75);
 		doubleBet.setFont(new Font("Arial", Font.PLAIN, 12));
-
-		allIn = new JButton("All In");
-		allIn.setPreferredSize(new Dimension(100, 100));
-		allIn.addActionListener(this);
-		allIn.setBounds(350, 570, 75, 75);
-		allIn.setFont(new Font("Arial", Font.PLAIN, 12));
-
+		
 		add(stand);
 		add(hit);
 		add(doubleBet);
-		add(allIn);
 
 		add(p);
 		setVisible(true);
@@ -165,25 +161,38 @@ public class Gui extends JFrame implements ActionListener {
 
 	// add a popup to ask for stake
 
-	public void drawCard(Card card, int holder) { // 0, 1, 2, are the dealer, player, deck, respectively
+	public void drawCard(Card card, int holder) { // 0, 1, 2, 3 are the dealer, player, deck, hole respectively
 
 		// instead of asking for value and suitImage, find out by checking a Card
 		int x = 0;
 		int y = 0;
-		if (holder == 0) {
+		
+		switch (holder) {
+		case 0: // Dealer's card is drawn
 			x = dealerX;
 			y = DEALERY;
 			dealerX += 80;
-		}
-		if (holder == 1) {
+			break;
+		case 1: // Player's card is drawn
 			x = playerX;
 			y = PLAYERY;
 			playerX += 80;
-		}
-		if (holder == 2) {
+			break;
+		case 2: // Deck card is drawn
 			x = DECKX;
 			y = DECKY;
+			break;
+		case 3: // Hole card is drawn (only different to dealer is that it is preset to the second dealer card
+			x = HOLEX;
+			y = DEALERY;
+			dealerX = 660; // get ready to draw 3rd card
+			holeCard = card;
+			break;
 		}
+	
+		System.out.println("Drawing a " + card + " at x = " + x + " and y = "+ y);
+		
+		
 		JPanel cardPanel;
 		Color textColour;
 
@@ -209,7 +218,7 @@ public class Gui extends JFrame implements ActionListener {
 
 			cardPanel = new JPanel();
 			cardPanel.setLayout(null);
-			cardPanel.setBounds(x, 80, 60, 80);
+			cardPanel.setBounds(x, y, 60, 80);
 			cardPanel.setBackground(Color.WHITE);
 			cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -220,6 +229,9 @@ public class Gui extends JFrame implements ActionListener {
 			cardPanel.add(suitLabel);
 
 		} else {
+			
+			// alternatively make this into char and then do some num bs to return the suited value as a char
+			
 			String suitedValue = "";
 			switch (card.getFace()) {
 			case 1:
@@ -232,7 +244,12 @@ public class Gui extends JFrame implements ActionListener {
 				suitedValue = "K";
 				break;
 			case 0:
-				suitedValue = "" + card.getValue();
+				
+				if (card.getValue() == 1) {
+					suitedValue = "A";
+				} else {
+					suitedValue = "" + card.getValue();		
+				}
 				break;
 			}
 
@@ -277,37 +294,106 @@ public class Gui extends JFrame implements ActionListener {
 			cardPanel.add(suitLabel);
 
 		}
-		// tested all the chip images and they're all good now
-		Image scl = blackChip100.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
-		// scales it to normal size, part of our research
-		JLabel chipPic = new JLabel(new ImageIcon(scl));
-		chipPic.setBounds(300, 200, 300, 300);
-		p.add(chipPic);
 		
+		if (holder == 3) {
+			holeCardDrawing = cardPanel;
+			p.add(holeCardDrawing);
+		} else {
+			p.add(cardPanel);
+		}
 		
-		p.add(cardPanel);
 		// also neccessary for testing
 		repaint();
 	}
+	
+	public void message(String s) {
+		result.setText(s);
+		repaint();
+	}
 
+	public void flipHoleCard() {
+		p.remove(holeCardDrawing);
+		holeCard.showFront();
+		System.out.println("The hole card is " + holeCard);
+		drawCard(holeCard, 3);
+	}
+	
+	
 	public void actionPerformed(ActionEvent e) {
+		int result = -1;
+		
 		JButton button = (JButton) e.getSource();
-
-		if (button.equals(stand)) {
-			JOptionPane.showMessageDialog(p, "Pussy boy is standing", "No balls", JOptionPane.WARNING_MESSAGE);
-		} else if (button.equals(hit)) {
-			JOptionPane.showMessageDialog(p, "Gimme another card", "Ballsy", JOptionPane.PLAIN_MESSAGE);
-		} else if (button.equals(doubleBet)) {
-			JOptionPane.showMessageDialog(p, "Gimme another card and take my money", "Ballsier",
-					JOptionPane.PLAIN_MESSAGE);
-		} else {
-			int buttonInt = Integer.parseInt(button.getText().substring(1));
-			int result = game.putIn(buttonInt);
-			if (result == 1) {
-				JOptionPane.showMessageDialog(p, "Not enough money for that bet!", "Brokey!",
-						JOptionPane.PLAIN_MESSAGE);
+		
+		if (!(button.equals(stand) || button.equals(hit) || button.equals(doubleBet))) {
+			int moneyIn = Integer.parseInt(button.getText().substring(1));
+			if (!game.putIn(moneyIn)) {
+				message("Not enough money");
 			}
 		}
+		
+		
+		
+		if (game.getStake() == 0) {
+			
+			message("First put in a bet");
+			
+		} else {
+
+			if (button.equals(stand)) {
+				
+				// reveal dealers hole card -> if dealer has less than 17, he draws until past 17 -> compare
+				
+				message("Standing");
+				// draw the card
+				flipHoleCard();
+				
+				for (Card card : game.stand()) {
+					
+					drawCard(card, 0);
+					
+					// how to slow down the drawing process?
+					
+				};
+				
+				result = game.compare();
+			} else if (button.equals(hit)) {
+				
+				// if over 21 -> lose, else keep going. if 21 then reveal then auto win 
+				
+				message("Hitting");
+				drawCard(game.hit(), 1);
+				
+				if (game.compare() == 22) { // Player busts
+					message("Lose!");
+					result = 22;
+				}
+				
+			} else if (button.equals(doubleBet)) {
+				message("Doubling");
+				
+			} else {
+				
+			}
+		}
+			
+		switch(result) {
+		case 11: // dealer bj
+			message("Dealer has a Blackjack!"); break;
+		case 12: // dealer busts
+			message("Dealer busts! Player wins!"); break;
+		case 13: // dealer wins
+			message("Dealer wins!"); break;
+		case 21: // player bj
+			message("Player has a Blackjack!"); break;
+		case 22: // player busts
+			message("Player busts! Dealer wins!"); break;
+		case 23: // player wins
+			message("Player wins!"); break;
+		case 30: // push
+			message("Push!"); break;
+		}
+		
+		
 		stake.setText("Stake: $" + game.getStake());
 		money.setText("Money: $" + game.getBalance());
 	}
