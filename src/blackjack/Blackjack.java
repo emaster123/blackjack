@@ -4,24 +4,61 @@ public class Blackjack {
 	
 	final static int H = 700;
 	final static int W = 1000;
-	
+
+	private static Hand player;
+	private static Hand dealer;
+	private static Deck deck;
+	private static Card deckCard;
+	private static Card holeCard;
+	private static Game game;
+	private static Gui table;
+
 	public static void main(String[] args) {
 		
-		Hand player = new Hand();
-		Hand dealer = new Hand();
+		Gui.intro();
 		
-		Game game = new Game(player, dealer);
+		player = new Hand();
+		dealer = new Hand();
+		deck = new Deck();
+
+		game = new Game(player, dealer, deck);
+		table = new Gui(game);
+
 		
-		Gui table = new Gui(game);
-		Card c = new Card(Card.Suit.HEARTS, 10);
-		Card d = new Card(Card.Suit.SPADES, 3);
-		Card e = new Card(Card.Suit.DIAMONDS, 2);
-		Card f = new Card(Card.Suit.CLUBS, 2);
-		table.drawCard(c, 0);
-		table.drawCard(d, 1);
-		table.drawCard(e, 2);
-		table.drawCard(f, 1);
 		
-				
-	}	
+		initGame(); // Start the first game
+	}
+
+	public static void initGame() {
+		// Reset the deck and hands
+		deck.shuffle();
+		player.clear(); 
+		dealer.clear();
+		game.setStake(0);
+
+		// Draw deck cover card
+		deckCard = new Card(Card.Suit.CLUBS, 1);
+		deckCard.showBack();
+		table.drawCard(deckCard, 2);
+
+		// Deal cards to player and dealer
+		Card currCard;
+
+		currCard = deck.deal();
+		player.take(currCard);
+		table.drawCard(currCard, 1);
+
+		currCard = deck.deal();
+		dealer.take(currCard);
+		table.drawCard(currCard, 0);
+
+		currCard = deck.deal();
+		player.take(currCard);
+		table.drawCard(currCard, 1);
+
+		holeCard = deck.deal();
+		holeCard.showBack();
+		dealer.take(holeCard);
+		table.drawCard(holeCard, 3);
+	}
 }

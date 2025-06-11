@@ -22,7 +22,7 @@ public class Deck {
 		
 		for (Suit suit : Suit.values()) {
 			
-			for (int i = 0; i < 13; i++) {
+			for (int i = 1; i < 13; i++) {
 				result.add(new Card(suit, i));
 			}
 			
