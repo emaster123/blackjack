@@ -29,7 +29,7 @@ public class Blackjack {
 
 	public static void initGame() {
 		// Reset the deck and hands
-		deck.shuffle();
+		deck = new Deck();
 		player.clear(); 
 		dealer.clear();
 		game.setStake(0);

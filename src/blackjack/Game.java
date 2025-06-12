@@ -7,7 +7,7 @@ public class Game {
 	private int stake, winnings, balance;
 	private Hand player, dealer;
 	private Deck deck;
-	private boolean betting;
+	private boolean betting = true;
 	
 	public Game(Hand player, Hand dealer, Deck deck) {
 		stake = 0;
