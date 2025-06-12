@@ -37,13 +37,11 @@ public class Game {
 		stake = 0;
 		balance += winnings;
 		fileManager.checkAndUpdateProfit(getWinnings());
-		winnings = 0;
 	}
 	
 	public void lose() {
 		stake = 0;
 		fileManager.checkAndUpdateProfit(getWinnings());
-		winnings = 0;
 		
 		if (balance == 0) {
 			reset();
