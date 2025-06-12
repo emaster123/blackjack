@@ -1,33 +1,193 @@
-package blackjack;
+/**
+ * @author Eli L, David S, Daniel C
+ */
 
+package blackjack;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class Gui extends JFrame implements ActionListener {
 
-	// Suit images
-	private Image heartImg, spadeImg, diamondImg, clubImg, backImg;
+	/** 
+	 * Image object representing the heart suit icon used for card rendering.
+	 */
+	private Image heartImg;
 
-	private JPanel p, holeCardDrawing;
+	/** 
+	 * Image object representing the spade suit icon used for card rendering.
+	 */
+	private Image spadeImg;
 
-	private JLabel money, stake, victory, result;
+	/** 
+	 * Image object representing the diamond suit icon used for card rendering.
+	 */
+	private Image diamondImg;
 
-	private Card holeCard; // save it to flip it
+	/** 
+	 * Image object representing the club suit icon used for card rendering.
+	 */
+	private Image clubImg;
 
-	// Chip Buttons
-	private JButton chip1, chip5, chip10, chip25, chip50, chip100, restartstake;
+	/** 
+	 * Image object representing the back of a playing card.
+	 */
+	private Image backImg;
 
-	// Stand/hit/double buttons
-	private JButton stand, hit, doubleDown, restart;
+	/**
+	 * Primary container panel for the game GUI.
+	 */
+	private JPanel p;
 
+	/**
+	 * Dedicated panel used to draw or display the dealer's hole card.
+	 */
+	private JPanel holeCardDrawing;
+
+	/**
+	 * Label that displays the player's current balance or available money.
+	 */
+	private JLabel money;
+
+	/**
+	 * Label that displays the current stake for the round.
+	 */
+	private JLabel stake;
+
+	/**
+	 * Label used to show how much the player won last time.
+	 */
+	private JLabel victory;
+
+	/**
+	 * Label that can be used to show messages (victory/loss or errors) to the player
+	 */
+	private JLabel result;
+
+	/**
+	 * Label showing the overall profit
+	 */
+	private JLabel profit;
+	/**
+	 * Reference to the dealer’s hole card (face-down card) to be revealed later.
+	 */
+	private Card holeCard;
+
+	/**
+	 * Button allowing the player to add a $1 to the stake.
+	 */
+	private JButton chip1;
+
+	/**
+	 * Button allowing the player to add a $5 to the stake.
+	 */
+	private JButton chip5;
+
+	/**
+	 * Button allowing the player to add a $10 to the stake.
+	 */
+	private JButton chip10;
+
+	/**
+	 * Button allowing the player to add a $25 to the stake.
+	 */
+	private JButton chip25;
+
+	/**
+	 * Button allowing the player to add a $50 to the stake.
+	 */
+	private JButton chip50;
+
+	/**
+	 * Button allowing the player to add a $100 to the stake.
+	 */
+	private JButton chip100;
+
+	/**
+	 * Button that resets the stake
+	 */
+	private JButton restartstake;
+
+	/**
+	 * Button that allows the player to stand
+	 */
+	private JButton stand;
+
+	/**
+	 * Button that allows the player to hit
+	 */
+	private JButton hit;
+
+	/**
+	 * Button that allows the player to double down 
+	 */
+	private JButton doubleDown;
+
+	/**
+	 * Button that restarts the game, resetting all necessary variables and UI elements.
+	 */
+	private JButton restart;
+
+	/**
+	 * Reference to the main Game object managing the logic and state of the blackjack game.
+	 */
 	private Game game;
 
-	// card coordinates
-	private int dealerX = 500, playerX = 500;
-	private final int DECKX = 800, DECKY = 300, DEALERY = 100, PLAYERY = 550, HOLEX = 580;
+	/**
+	 * X-coordinate position for drawing dealer cards on the GUI.
+	 */
+	private int dealerX = 500;
 
+	/**
+	 * X-coordinate position for drawing player cards on the GUI.
+	 */
+	private int playerX = 500;
+
+	/**
+	 * Constant X-coordinate for the card deck's location on the GUI.
+	 */
+	private final int DECKX = 800;
+
+	/**
+	 * Constant Y-coordinate for the card deck's location on the GUI.
+	 */
+	private final int DECKY = 300;
+
+	/**
+	 * Constant Y-coordinate for the dealer's card row.
+	 */
+	private final int DEALERY = 100;
+
+	/**
+	 * Constant Y-coordinate for the player's card row.
+	 */
+	private final int PLAYERY = 550;
+
+	/**
+	 * Constant X-coordinate for positioning the dealer's hole card.
+	 */
+	private final int HOLEX = 580;
+
+	/**
+	 * Constructs the graphical user interface for the Blackjack game.
+	 * <p>
+	 * This constructor initializes and lays out all GUI components, including:
+	 * <ul>
+	 *   <li>Suit images used for rendering cards</li>
+	 *   <li>Labels for displaying money, stake, victory, and game results</li>
+	 *   <li>Chip buttons for placing bets in varying denominations ($1 to $100)</li>
+	 *   <li>Action buttons for gameplay: Hit, Stand, Double Down, and Restart</li>
+	 *   <li>Layout panels and configuration for the main game window</li>
+	 * </ul>
+	 * The GUI is styled with a green table background and fixed window size,
+	 * and responds to user interaction via ActionListeners.
+	 * 
+	 * @param game the {@code Game} instance controlling game logic and state.
+	 * 
+	 * @author David S
+	 */
 	public Gui(Game game) {
 		setTitle("Blackjack Game");
 		setSize(1000, 700);
@@ -74,6 +234,12 @@ public class Gui extends JFrame implements ActionListener {
 		result.setFont(new Font("SansSerif", Font.BOLD, 20));
 		result.setBounds(240, 140, 250, 30);
 		p.add(result);
+		
+		profit = new JLabel("Highest Profit: $" + game.readHighestProfit());
+		profit.setForeground(Color.YELLOW);
+		profit.setFont(new Font("SansSerif", Font.BOLD, 20));
+		profit.setBounds(750, 10, 300, 40);
+		p.add(profit);
 
 		// Chip buttons
 
@@ -163,8 +329,30 @@ public class Gui extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 
-	// add a popup to ask for stake
-
+	
+	/**
+	 * Draws a card on the GUI at the appropriate position based on the card's owner.
+	 * <p>
+	 * This method determines the (x, y) drawing coordinates based on the holder type:
+	 * <ul>
+	 *   <li><b>0</b> - Dealer</li>
+	 *   <li><b>1</b> - Player</li>
+	 *   <li><b>2</b> - Deck</li>
+	 *   <li><b>3</b> - Dealer's hole card (face-down)</li>
+	 * </ul>
+	 * Depending on whether the card is flipped, either the back of the card is shown or
+	 * the suit and value are rendered. Suit icons and text colors are applied accordingly.
+	 * The card panel is added to the main display panel, and the UI is updated via repaint.
+	 * 
+	 * @param card   the {@code Card} object to be drawn, either face-up or face-down.
+	 * @param holder an integer code representing the card's owner or location:
+	 *               <ul>
+	 *                 <li>0 = Dealer</li>
+	 *                 <li>1 = Player</li>
+	 *                 <li>2 = Deck (used when dealing from deck)</li>
+	 *                 <li>3 = Dealer’s hole card (face-down, second card)</li>
+	 *               </ul>
+	 */
 	public void drawCard(Card card, int holder) { // 0, 1, 2, 3 are the dealer, player, deck, hole respectively
 
 		// instead of asking for value and suitImage, find out by checking a Card
@@ -175,12 +363,12 @@ public class Gui extends JFrame implements ActionListener {
 		case 0: // Dealer's card is drawn
 			x = dealerX;
 			y = DEALERY;
-			dealerX += 80;
+			dealerX += 80; // shift for next card
 			break;
 		case 1: // Player's card is drawn
 			x = playerX;
 			y = PLAYERY;
-			playerX += 80;
+			playerX += 80; // shift
 			break;
 		case 2: // Deck card is drawn
 			x = DECKX;
@@ -218,7 +406,7 @@ public class Gui extends JFrame implements ActionListener {
 			break;
 		}
 
-		if (card.isFlipped()) {
+		if (card.isFlipped()) { 
 
 			cardPanel = new JPanel();
 			cardPanel.setLayout(null);
@@ -310,12 +498,21 @@ public class Gui extends JFrame implements ActionListener {
 		// also neccessary for testing
 		repaint();
 	}
+	
+	/**
+	 * Updates the {@code result} to show a message 
+	 * @param s the message
+	 */
 
 	public void message(String s) {
 		result.setText(s);
 		repaint();
 	}
 
+	/**
+	 * Flips the hole card
+	 */
+	
 	public void flipHoleCard() {
 		p.remove(holeCardDrawing);
 		holeCard.showFront();
@@ -323,107 +520,133 @@ public class Gui extends JFrame implements ActionListener {
 		drawCard(holeCard, 3);
 	}
 
+	/**
+	 * Handles user interactions from button clicks during the Blackjack game.
+	 * <p>
+	 * This method distinguishes between betting and playing phases:
+	 * <ul>
+	 *   <li>If in the betting phase, it processes chip inputs.</li>
+	 *   <li>If playing, it processes actions like Stand, Hit, and Double Down.</li>
+	 *   <li>Handles game result logic after each move and displays appropriate messages.</li>
+	 *   <li>Updates stake, money, and winnings labels based on game state.</li>
+	 * </ul>
+	 *
+	 * @param e the {@code ActionEvent} triggered by user interaction with a JButton.
+	 */
 	public void actionPerformed(ActionEvent e) {
-		int result = -1;
+	    int result = -1;
 
-		JButton button = (JButton) e.getSource();
+	    // Identify which button was clicked
+	    JButton button = (JButton) e.getSource();
 
-		if (!(button.equals(stand) || button.equals(hit) || button.equals(doubleDown) || button.equals(restart))
-				&& game.isBetting()) {
-			// putting a bet, do not read text
-			int moneyIn = Integer.parseInt(button.getText().substring(1));
-			if (!game.putIn(moneyIn)) {
-				message("Not enough money");
-			}
-		} else if (button.equals(restart) && restart.isVisible()) { // restart
+	    // Handle chip betting phase
+	    if (!(button.equals(stand) || button.equals(hit) || button.equals(doubleDown) || button.equals(restart))
+	            && game.isBetting()) {
 
-			clearTable();
-			game.setBetting(true);
-			Blackjack.initGame();
+	        // Convert button label (e.g., "$25") to integer value
+	        int moneyIn = Integer.parseInt(button.getText().substring(1));
 
-		} else if (game.getStake() == 0) { // can't do anything unless you have a stake
+	        // Try placing the bet; show error if insufficient funds
+	        if (!game.putIn(moneyIn)) {
+	            message("Not enough money");
+	        }
 
-			message("First put in a bet");
+	    // Handle restart logic (only if restart button is visible)
+	    } else if (button.equals(restart) && restart.isVisible()) {
 
-		} else { // here you can play
+	        clearTable();              // Clear all cards and reset visuals
+	        game.setBetting(true);     // Enable betting for the next round
+	        Blackjack.initGame();      // Start a new game
 
-			game.setBetting(false);
+	    // Enforce that a stake must be placed before playing
+	    } else if (game.getStake() == 0) {
 
-			if (button.equals(stand)) { // stand
+	        message("First put in a bet");
 
-				// reveal dealers hole card -> if dealer has less than 17, he draws until past
-				// 17 -> compare
+	    } else {
+	        // Player is now taking game actions (hit, stand, double)
+	        game.setBetting(false);
 
-				doubleDown.setVisible(false);
-				result = stand();
+	        if (button.equals(stand)) {
 
-			} else if (button.equals(hit)) { // hit
+	            // Player chooses to stand, dealer plays
+	            doubleDown.setVisible(false);
+	            result = stand();
 
-				// if over 21 -> lose, else keep going. if 21 then reveal then auto win
+	        } else if (button.equals(hit)) {
 
-				doubleDown.setVisible(false);
-				result = hit();
+	            // Player hits (draws a card)
+	            doubleDown.setVisible(false);
+	            result = hit();
 
-			} else if (button.equals(doubleDown) && doubleDown.isVisible()) { // double bet
+	        } else if (button.equals(doubleDown) && doubleDown.isVisible()) {
 
-				if (!game.putIn(game.getStake())) {
-					message("Not enough money");
-				} else {
+	            // Player doubles down (doubles bet and hits once)
+	            if (!game.putIn(game.getStake())) {
+	                message("Not enough money");
+	            } else {
+	                game.putIn(game.getStake());   // Double the stake
+	                result = hit();                // Take one card
 
-					game.putIn(game.getStake());
+	                if (result != 22) {            // If not busted, auto-stand
+	                    result = stand();
+	                }
+	            }
+	        }
 
-					result = hit();
+	        // Make restart button visible after round
+	        restart.setVisible(true);
 
-					if (result != 22) { // if the player didn't bust from hitting
-						result = stand(); // then stand
-					}
+	        // Evaluate game result and apply consequences
+	        switch (result) {
+	            case 11: // Dealer has Blackjack
+	                message("Dealer has a Blackjack!");
+	                game.lose();
+	                break;
+	            case 12: // Dealer busts
+	                message("Dealer busts! Player wins!");
+	                game.win(2);
+	                break;
+	            case 13: // Dealer wins
+	                message("Dealer wins!");
+	                game.lose();
+	                break;
+	            case 21: // Player Blackjack
+	                message("Player has a Blackjack!");
+	                game.win(2.5);
+	                break;
+	            case 22: // Player busts
+	                message("Player busts! Dealer wins!");
+	                game.lose();
+	                break;
+	            case 23: // Player wins
+	                message("Player wins!");
+	                game.win(2);
+	                break;
+	            case 30: // Push (tie)
+	                message("Push!");
+	                game.win(1);
+	                break;
+	            default: // Game still ongoing or no result
+	                restart.setVisible(false);
+	                break;
+	        }
+	    }
 
-				}
-			}
-
-			restart.setVisible(true);
-
-			switch (result) {
-			case 11: // dealer bj
-				message("Dealer has a Blackjack!");
-				game.lose();
-				break;
-			case 12: // dealer busts
-				message("Dealer busts! Player wins!");
-				game.win(2);
-				break;
-			case 13: // dealer wins
-				message("Dealer wins!");
-				game.lose();
-				break;
-			case 21: // player bj
-				message("Player has a Blackjack!");
-				game.win(2.5);
-				break;
-			case 22: // player busts
-				message("Player busts! Dealer wins!");
-				game.lose();
-				break;
-			case 23: // player wins
-				message("Player wins!");
-				game.win(2);
-				break;
-			case 30: // push
-				message("Push!");
-				game.win(1);
-				break;
-			default:
-				restart.setVisible(false);
-				break;
-			}
-		}
-
-		stake.setText("Stake: $" + game.getStake());
-		money.setText("Money: $" + game.getBalance());
-		victory.setText("You win $ " + game.getWinnings());
-
+	    // Update UI labels with latest game values
+	    stake.setText("Stake: $" + game.getStake());
+	    money.setText("Money: $" + game.getBalance());
+	    victory.setText("You win $" + game.getWinnings());
+	    profit.setText("Highest profit: $" + game.readHighestProfit());
 	}
 
+	
+	/**
+	 * Removes all card components by going through each component, seeing if it is not a JLabel or JButton. If it isn't,
+	 * it deletes the component since it must be a JFrame (a card). Then it resets everything else.
+	 * 
+	 */
+	
 	public void clearTable() {
 
 		// Remove all card components from the panel
@@ -431,7 +654,7 @@ public class Gui extends JFrame implements ActionListener {
 		for (int i = components.length - 1; i >= 0; i--) {
 			Component c = components[i];
 			// Skip JLabel components like money, stake, victory, result
-			if (!(c instanceof JLabel)) {
+			if (!(c instanceof JLabel || c instanceof JButton)) {
 				p.remove(c);
 			}
 		}
@@ -454,10 +677,19 @@ public class Gui extends JFrame implements ActionListener {
 		repaint();
 	}
 
+	/**
+	 * When the round is over, the restart button appears to start a new game
+	 */
+	
 	public void finish() {
 		restart.setVisible(true);
 	}
 
+	/**
+	 * Stand by flipping the hole card, running {@code game.stand()} and then drawing the cards from that method
+	 * Then finish the round and run {@code game.compare()} to see the result
+	 */
+	
 	public int stand() {
 		flipHoleCard();
 
@@ -473,6 +705,19 @@ public class Gui extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * 
+	 * Run the {@code game.run()} and then draw the card returned from it. 
+	 * Run {@code game.compare()} to see if the round can be ended immediately
+	 * 
+	 * @return The result:
+	 * <ul>
+	 * 		<li> 22 - the player busts </li>
+	 * 		<li> 21 - the player gets a blackjack </li>
+	 * 		<li> -1 - the game hasn't ended </li>
+	 * </ul>
+	 */
+	
 	public int hit() {
 		drawCard(game.hit(), 1);
 
@@ -487,6 +732,10 @@ public class Gui extends JFrame implements ActionListener {
 		}
 	}
 
+	
+	/**
+	 * Gives an introductory pop-up about the authors and Blackjack
+	 */
 	public static void intro() {
 
 		int opening = JOptionPane.showConfirmDialog(null,
