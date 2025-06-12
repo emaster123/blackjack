@@ -9,6 +9,8 @@ public class Game {
 	private Deck deck;
 	private boolean betting = true;
 	
+	private FileManager fileManager = new FileManager();
+	
 	public Game(Hand player, Hand dealer, Deck deck) {
 		stake = 0;
 		winnings = 0;
@@ -34,12 +36,19 @@ public class Game {
 		winnings = (int) (stake*multiplier);
 		stake = 0;
 		balance += winnings;
+		fileManager.checkAndUpdateProfit(getWinnings());
 		winnings = 0;
 	}
 	
 	public void lose() {
 		stake = 0;
+		fileManager.checkAndUpdateProfit(getWinnings());
 		winnings = 0;
+		
+		if (balance == 0) {
+			reset();
+		}
+		
 	}
 	
 
@@ -137,6 +146,15 @@ public class Game {
 	public void setBetting(boolean betting) {
 		this.betting = betting;
 	}
+	
+	public FileManager getFileManager() {
+		return fileManager;
+	}
+
+	public int readHighestProfit() {
+		return fileManager.readHighestProfit();
+	}
+	
 	
 	
 }
