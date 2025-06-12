@@ -17,7 +17,7 @@ public class Gui extends JFrame implements ActionListener {
     private Card holeCard; // save it to flip it
 
     // Chip Buttons
-    private JButton chip1, chip5, chip10, chip25, chip50, chip100;
+    private JButton chip1, chip5, chip10, chip25, chip50, chip100, restartstake;
 
     // Stand/hit/double buttons
     private JButton stand, hit, doubleDown, restart;
@@ -112,7 +112,14 @@ public class Gui extends JFrame implements ActionListener {
         chip100.addActionListener(this);
         chip100.setBounds(50, 490, 60, 60);
         chip100.setFont(new Font("Arial", Font.PLAIN, 10));
-
+        
+        restartstake = new JButton("Reset stake");
+        restartstake.setPreferredSize(new Dimension(50,120));
+        restartstake.addActionListener(this);
+        restartstake.setBounds(50,180,60,60);
+        restartstake.setFont(new Font("Arial", Font.PLAIN, 10));
+        
+        
         add(chip1);
         add(chip5);
         add(chip10);
@@ -321,7 +328,8 @@ public class Gui extends JFrame implements ActionListener {
 
         JButton button = (JButton) e.getSource();
 
-        if (!(button.equals(stand) || button.equals(hit) || button.equals(doubleDown) || button.equals(restart))) { // putting a bet, do not read text
+        if (!(button.equals(stand) || button.equals(hit) || button.equals(doubleDown) || button.equals(restart)) && game.isBetting()) { 
+        	// putting a bet, do not read text
             int moneyIn = Integer.parseInt(button.getText().substring(1));
             if (!game.putIn(moneyIn)) {
                 message("Not enough money");
@@ -333,6 +341,7 @@ public class Gui extends JFrame implements ActionListener {
 
         } else if (game.getStake() == 0) { // can't do anything unless you have a stake
 
+        	game.setBetting(false);
             message("First put in a bet");
 
         } else { // here you can play
@@ -369,6 +378,8 @@ public class Gui extends JFrame implements ActionListener {
                 }
             }
 
+            restart.setVisible(true);
+            
             switch (result) {
             case 11: // dealer bj
                 message("Dealer has a Blackjack!");
@@ -398,6 +409,7 @@ public class Gui extends JFrame implements ActionListener {
                 message("Push!");
                 game.win(1);
                 break;
+            default: restart.setVisible(false);break;
             }
         }
 

@@ -7,7 +7,7 @@ public class Game {
 	private int stake, winnings, balance;
 	private Hand player, dealer;
 	private Deck deck;
-	private String result; // corresponds to win/bj/bust/push
+	private boolean betting;
 	
 	public Game(Hand player, Hand dealer, Deck deck) {
 		stake = 0;
@@ -124,6 +124,18 @@ public class Game {
 	
 	public int getScore() {
 		return player.getScore();
+	}
+	
+	public void reset() {
+		balance = 600;
+	}
+	
+	public boolean isBetting() {
+		return betting;
+	}
+	
+	public void setBetting(boolean betting) {
+		this.betting = betting;
 	}
 	
 	

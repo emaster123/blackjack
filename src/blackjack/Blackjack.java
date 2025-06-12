@@ -24,8 +24,6 @@ public class Blackjack {
 		game = new Game(player, dealer, deck);
 		table = new Gui(game);
 
-		
-		
 		initGame(); // Start the first game
 	}
 
