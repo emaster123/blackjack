@@ -752,5 +752,4 @@ public class Gui extends JFrame implements ActionListener {
 							+ "\nDouble: Double your bet, hit once, then stand." + "\nGood luck!");
 		}
 	}
-
 }
