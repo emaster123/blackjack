@@ -4,6 +4,9 @@ package blackjack;
  * @author David S
  */
 
+/**
+ * The class where everything runs. 
+ */
 public class Blackjack {
 	
 	/** 
