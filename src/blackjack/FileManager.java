@@ -5,12 +5,11 @@ import java.io.*;
 /**
  * Handles reading from and writing to a local file that stores the highest profit
  * achieved in a Blackjack game session.
- * <p>
  * This class creates a file named {@code blackjack.txt} if it does not already exist,
  * and provides methods to read the current high score, write a new high score,
  * and update it if a higher profit is achieved.
  * 
- * @author Eli L
+ * @author David S
  */
 public class FileManager {
 
