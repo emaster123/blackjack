@@ -355,6 +355,7 @@ public class Gui extends JFrame implements ActionListener {
 	 *                 <li>2 = Deck (used when dealing from deck)</li>
 	 *                 <li>3 = Dealer’s hole card (face-down, second card)</li>
 	 *               </ul>
+	 * @author Daniel C
 	 */
 	public void drawCard(Card card, int holder) { // 0, 1, 2, 3 are the dealer, player, deck, hole respectively
 
@@ -505,6 +506,7 @@ public class Gui extends JFrame implements ActionListener {
 	/**
 	 * Updates the {@code result} to show a message 
 	 * @param s the message
+	 * @author Eli L
 	 */
 
 	public void message(String s) {
@@ -514,6 +516,7 @@ public class Gui extends JFrame implements ActionListener {
 
 	/**
 	 * Flips the hole card
+	 * @author Eli L
 	 */
 	
 	public void flipHoleCard() {
@@ -535,6 +538,7 @@ public class Gui extends JFrame implements ActionListener {
 	 * </ul>
 	 *
 	 * @param e the {@code ActionEvent} triggered by user interaction with a JButton.
+	 * @author Eli L and David S
 	 */
 	public void actionPerformed(ActionEvent e) {
 	    int result = -1;
@@ -648,6 +652,7 @@ public class Gui extends JFrame implements ActionListener {
 	 * Removes all card components by going through each component, seeing if it is not a JLabel or JButton. If it isn't,
 	 * it deletes the component since it must be a JFrame (a card). Then it resets everything else.
 	 * 
+	 * @author Eli L
 	 */
 	
 	public void clearTable() {
@@ -682,6 +687,7 @@ public class Gui extends JFrame implements ActionListener {
 
 	/**
 	 * When the round is over, the restart button appears to start a new game
+	 * @author Eli L
 	 */
 	
 	public void finish() {
@@ -691,6 +697,8 @@ public class Gui extends JFrame implements ActionListener {
 	/**
 	 * Stand by flipping the hole card, running {@code game.stand()} and then drawing the cards from that method
 	 * Then finish the round and run {@code game.compare()} to see the result
+	 * 
+	 * @author Eli L
 	 */
 	
 	public int stand() {
@@ -719,6 +727,8 @@ public class Gui extends JFrame implements ActionListener {
 	 * 		<li> 21 - the player gets a blackjack </li>
 	 * 		<li> -1 - the game hasn't ended </li>
 	 * </ul>
+	 * 
+	 * @author Eli L 
 	 */
 	
 	public int hit() {
@@ -738,6 +748,7 @@ public class Gui extends JFrame implements ActionListener {
 	
 	/**
 	 * Gives an introductory pop-up about the authors and Blackjack
+	 * @author Eli L
 	 */
 	public static void intro() {
 
