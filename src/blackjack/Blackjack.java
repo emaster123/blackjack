@@ -1,18 +1,66 @@
 package blackjack;
 
+/**
+ * @author David S
+ */
+
 public class Blackjack {
 	
+	/** 
+	 * Constant height of the game window in pixels.
+	 */
 	final static int H = 700;
+
+	/** 
+	 * Constant width of the game window in pixels.
+	 */
 	final static int W = 1000;
 
+	/**
+	 * The player's hand of cards.
+	 * Used to store and evaluate the player's current cards in play.
+	 */
 	private static Hand player;
+
+	/**
+	 * The dealer's hand of cards.
+	 * Stores the cards held by the dealer during the current round.
+	 */
 	private static Hand dealer;
+
+	/**
+	 * The deck of cards used in the game.
+	 * Provides shuffled cards for dealing to player and dealer.
+	 */
 	private static Deck deck;
+
+	/**
+	 * The top card of the deck shown face-down (simulating the deck visually).
+	 */
 	private static Card deckCard;
+
+	/**
+	 * The dealer's hole card (face-down card revealed at the end of the round).
+	 */
 	private static Card holeCard;
+
+	/**
+	 * The game logic controller.
+	 * Handles the rules, balance, betting, and win/loss logic.
+	 */
 	private static Game game;
+
+	/**
+	 * The GUI for displaying the table and interacting with the user.
+	 */
 	private static Gui table;
 
+	
+	
+	/**
+	 * Main method. First gives an intro, then creates everything necessary
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		Gui.intro();
@@ -27,6 +75,9 @@ public class Blackjack {
 		initGame(); // Start the first game
 	}
 
+	/**
+	 * Method that initializes the game. Clears the hands, resets the stake and bets the cards.
+	 */
 	public static void initGame() {
 		// Reset the deck and hands
 		deck = new Deck();
