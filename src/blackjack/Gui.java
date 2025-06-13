@@ -698,6 +698,8 @@ public class Gui extends JFrame implements ActionListener {
 	 * Stand by flipping the hole card, running {@code game.stand()} and then drawing the cards from that method
 	 * Then finish the round and run {@code game.compare()} to see the result
 	 * 
+	 * @return {@code game.compare()} of the current situation. Look in the Game class for more info
+	 * 
 	 * @author Eli L
 	 */
 	
